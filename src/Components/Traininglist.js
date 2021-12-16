@@ -6,11 +6,14 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import dayjs from 'dayjs';
 
 
+import Deletetraining from './Deletetraining';
 
 export default function Traininglist() {
     // -- Trainings data related functionality --
     const [trainings, setTrainings] = useState([]);
     const [open, setOpen] = useState(false);
+    const [msg, setMsg] = useState('');
+
    
 
     const handleClose = () => {
@@ -25,12 +28,24 @@ export default function Traininglist() {
         .catch(err => console.error(err))
     }
 
-    
+    const deleteTraining = (Id) => {
+        fetch(`https://customerrest.herokuapp.com/api/trainings/${Id}`, { method: "DELETE" })
+        .then(response => {
+            if (response.ok) {
+                fetchTrainings();
+                setMsg("Training deleted");
+                setOpen(true);
+            } else {
+                setMsg("Delete unsuccessful");
+                setOpen(true);
+            }
+        })
+        .catch(err => console.error(err));
+    }
 
     
 
     
-
     // -- Column data related functionality --
     const columns = [
         {
@@ -42,13 +57,13 @@ export default function Traininglist() {
              filter: true
         },
         {
-            headerName: 'Duration',
+            Header: 'Duration',
             field: 'duration', 
             sortable: true,
              filter: true
         },
         {
-            headerName: 'Activity',
+            Header: 'Activity',
             field: 'activity', 
             sortable: true,
              filter: true
@@ -63,6 +78,14 @@ export default function Traininglist() {
             filter: true
         },
         
+        {
+            headerName: "",
+            field: '_links.self.href',
+            sortable: false,
+            filterable: false,
+            width: 120,
+            cellRendererFramework: params => <Deletetraining deleteTraining={deleteTraining} training={params} />
+        }
     ]
 
     return (
@@ -79,7 +102,7 @@ export default function Traininglist() {
         </div>
         <Snackbar
                 open={open}
-                
+                message={msg}
                 autoHideDuration={3000}
                 onClose={handleClose}
             />
