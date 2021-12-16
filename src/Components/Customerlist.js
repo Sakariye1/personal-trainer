@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { Button, Snackbar } from '@mui/material';
 
+
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
@@ -16,7 +17,7 @@ export default function Customerlist() {
     const [customers, setCustomers] = useState([]);
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState('');
-
+    
     const handleClose = () => {
         setOpen(false);
     };
@@ -56,24 +57,21 @@ export default function Customerlist() {
         .catch(err => console.error(err));
     }
 
-    const deleteCustomer =(Id)  => {
-       
-        fetch(`https://customerrest.herokuapp.com/api/customers/${Id}`, {
-             method: "DELETE" })
+    const deleteCustomer = Url => {
+        fetch(Url, { method: "DELETE" })
         .then(response => {
             if (response.ok) {
                 fetchCustomer();
-                setMsg("Customer deleted");
+                setMsg("Customer deleted");     
                 setOpen(true);
             } else {
-                setMsg("Delete unsuccessful");
+                setMsg("Delete unsuccessful");  
                 setOpen(true);
             }
         })
         .catch(err => console.error(err));
-    
-
     }
+
     const AddCustomer = customer => {
     fetch("https://customerrest.herokuapp.com/api/customers",
     {
@@ -99,25 +97,25 @@ export default function Customerlist() {
 
     
 
-    const updateCustomer = (url, updatedCustomer) => {
-        fetch(url, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(updatedCustomer)
-        })
-        .then(response => {
-            if (response.ok) {
-            fetchCustomer();
-            setMsg("Customer edited succesfully");
-            setOpen(true);
-        }
-        else {
-            alert("Unsuccesful");
-        }
+const updateCustomer = (url, updatedCustomer) => {
+    fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(updatedCustomer)
     })
-        
-        .catch(err => console.error(err));
+    .then(response => {
+        if (response.ok) {
+        fetchCustomer();
+        setMsg("Customer edited succesfully");
+        setOpen(true);
     }
+    else {
+        alert("Unsuccesful");
+    }
+})
+    
+    .catch(err => console.error(err));
+}
 
     // -- Column data related functionality --
     const columns = [
@@ -166,7 +164,7 @@ export default function Customerlist() {
         },
         {
             headerName: '',
-            field: "links.self.href",
+            field: "links.0.href",
             sortable: false,
             filter: false,
             width: 120,
@@ -175,20 +173,20 @@ export default function Customerlist() {
         
         {
             headerName: '',
-            field: '_links.self.href',
+            field: "links.0.href",
             filter: false,
             sortable: false,
             width: 120,
             cellRendererFramework: params => <Editcustomer updateCustomer={updateCustomer} customer={params} />
         },
         {
-            headerName: '',
-            field: '_links.self.href',
+            headerName: "",
+            field: "links.0.href",
             sortable: false,
             filter: false,
             width: 120,
-            cellRendererFramework: params => < Deletecustomer deleteCustomer={deleteCustomer} customer={params} />
-        }
+            cellRendererFramework: params => <Deletecustomer deleteCustomer={deleteCustomer} customer={params} />
+        },
     ]
 
     return (

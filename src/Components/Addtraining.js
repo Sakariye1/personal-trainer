@@ -48,9 +48,8 @@ export default function Addtraining(props) {
                         margin="dense"
                         name="date"
                         value={training.date}
-                        onChange={e => handleInputChange(e)}
+                        onChange={handleInputChange}
                         label="Date (YYYY-MM-DD)"
-
                         fullWidth
                     />
                     <TextField
@@ -58,9 +57,8 @@ export default function Addtraining(props) {
                         margin="dense"
                         name="duration"
                         value={training.duration}
-                        onChange={e => handleInputChange(e)}
+                        onChange={handleInputChange}
                         label="Duration (MIN)"
-
                         fullWidth
                     />
                     <TextField
@@ -68,9 +66,8 @@ export default function Addtraining(props) {
                         margin="dense"
                         name="activity"
                         value={training.activity}
-                        onChange={e => handleInputChange(e)}
+                        onChange={handleInputChange}
                         label="Activity"
-
                         fullWidth
                     />
     
