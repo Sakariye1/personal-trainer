@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import {Button, Snackbar} from '@mui/material';
+import {Snackbar} from '@mui/material';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import dayjs from 'dayjs';
-
-
 import Deletetraining from './Deletetraining';
 
 export default function Traininglist() {
@@ -14,7 +12,6 @@ export default function Traininglist() {
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState('');
 
-   
 
     const handleClose = () => {
         setOpen(false);
@@ -80,7 +77,7 @@ export default function Traininglist() {
         
         {
             headerName: "",
-            field: '_links.self.href',
+            field: 'id',
             sortable: false,
             filterable: false,
             width: 120,

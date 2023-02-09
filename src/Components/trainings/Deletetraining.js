@@ -31,7 +31,7 @@ export default function DeleteTraining(props) {
                 <DialogTitle>{"Delete this training?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Deleting this training will delete it for good.
+                        Are you sure?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

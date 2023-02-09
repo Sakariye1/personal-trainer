@@ -35,7 +35,7 @@ export default function Addcustomer(props) {
     return (
         <div>
             <Button variant="outlined" onClick={handleClickOpen}>
-                New Customer
+                Add Customer
       </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">New Customer</DialogTitle>
@@ -118,10 +118,10 @@ export default function Addcustomer(props) {
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
-          </Button>
+                    </Button>
                     <Button onClick={handleSave} color="primary">
                         Save
-          </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

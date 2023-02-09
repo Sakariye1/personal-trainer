@@ -6,7 +6,7 @@ import { Button, Snackbar } from '@mui/material';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
-import Addtraining from './Addtraining';
+import Addtraining from '../trainings/Addtraining';
 import Addcustomer from './Addcustomer';
 import Editcustomer from './Editcustomer';
 import Deletecustomer from './Deletecustomer';
@@ -27,14 +27,7 @@ export default function Customerlist() {
      },
       []);
 
-    const fetchCustomer = () => {
-        fetch('https://customerrest.herokuapp.com/api/customers')
-        .then(response => response.json())
-        .then(data => setCustomers(data.content))
-        .catch(err => console.error(err))
-    }
-
-    const addTraining = training => {
+      const addTraining = training => {
         fetch('https://customerrest.herokuapp.com/api/trainings',
             {
                 method: "POST",
@@ -45,18 +38,25 @@ export default function Customerlist() {
         .then(response => {
             if (response.ok) {
                 fetchCustomer();
-                setMsg("Training added");
-               
+                setMsg("Training added"); 
                 setOpen(true);
             } else {
-                setMsg("Add unsuccessful");
-                
+                setMsg("Add unsuccessful");         
                 setOpen(true);
             }
         })
         .catch(err => console.error(err));
     }
 
+
+    const fetchCustomer = () => {
+        fetch('https://customerrest.herokuapp.com/api/customers')
+        .then(response => response.json())
+        .then(data => setCustomers(data.content))
+        .catch(err => console.error(err))
+    }
+
+    
     const deleteCustomer = Url => {
         fetch(Url, { method: "DELETE" })
         .then(response => {
@@ -84,11 +84,9 @@ export default function Customerlist() {
     if (response.ok) {
         fetchCustomer();
         setMsg("Customer added");
-        
         setOpen(true);
     } else {
-        setMsg("Add unsuccessful");
-        
+        setMsg("Add unsuccessful"); 
         setOpen(true);
     }
 })
@@ -106,11 +104,12 @@ const updateCustomer = (url, updatedCustomer) => {
     .then(response => {
         if (response.ok) {
         fetchCustomer();
-        setMsg("Customer edited succesfully");
+        setMsg("Customer updated succesfully");
         setOpen(true);
     }
     else {
-        alert("Unsuccesful");
+        setMsg("Updated unsuccesfully");
+        setOpen(true);
     }
 })
     

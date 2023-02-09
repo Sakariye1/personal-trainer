@@ -10,7 +10,7 @@ export default function Addtraining(props) {
         {date: '', 
         duration: '', 
         activity: '',
-        customer: props.customer
+        customer: props.customer.data.links[0].href
     });
         
         console.log(training);
@@ -25,9 +25,9 @@ export default function Addtraining(props) {
 
     const handleInputChange = (e) => {
         setTraining({ ...training, [e.target.name]: e.target.value })
-    }
+    };
     const handleSave = () => {
-        props.addtraining(training);
+        props.addTraining(training);
         handleClose();
     }
 
