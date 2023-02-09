@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle}from '@mui/material';
-import dayjs from 'dayjs';
 
 
 export default function Addtraining(props) {

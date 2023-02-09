@@ -6,6 +6,7 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import dayjs from 'dayjs';
 import Deletetraining from './Deletetraining';
 
+
 export default function Traininglist() {
     // -- Trainings data related functionality --
     const [trainings, setTrainings] = useState([]);

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 
-
 export default function Deletecustomer(props) {
     const [open, setOpen] = useState(false);
 

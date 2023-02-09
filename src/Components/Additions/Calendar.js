@@ -8,7 +8,6 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { CheckCircleTwoTone } from "@mui/icons-material";
 
 
-
 export default function Calendar() {
     const [open, setOpen] = useState(false);
     const [trainings, setTrainings] = useState([]);
